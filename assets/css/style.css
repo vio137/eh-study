@@ -135,8 +135,8 @@ main{position:relative;z-index:2}
 .reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}
 
 /* module shell */
-.mod{max-width:var(--maxw);margin:64px auto;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(14,23,20,.85),rgba(9,14,12,.9));padding:34px 28px;position:relative;overflow:hidden}
-.mod::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(97,255,183,.014) 3px 4px);pointer-events:none}
+.mod{max-width:var(--maxw);margin:64px auto;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(14,23,20,.85),rgba(9,14,12,.9));padding:34px 28px;position:relative}
+.mod::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(97,255,183,.014) 3px 4px);pointer-events:none}
 .mod-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;color:var(--grn);text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:5px 13px;margin-bottom:18px}
 .mod-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--grn);box-shadow:0 0 8px var(--grn);animation:blink 1.6s steps(1) infinite}
 .mod-title{font-size:clamp(20px,3vw,27px);font-weight:700;margin-bottom:6px}
