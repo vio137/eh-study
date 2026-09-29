@@ -1,1 +1,21 @@
-{"name":"ethical-hacking-study-lab","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"vite --host 0.0.0.0","build":"vite build"},"dependencies":{"react":"^19.1.0","react-dom":"^19.1.0","react-router-dom":"^7.9.0"},"devDependencies":{"vite":"^7.1.0","typescript":"^5.9.2","@vitejs/plugin-react":"^5.0.0","vite-plugin-singlefile":"^2.3.0"}}
+{
+  "name": "ethical-hacking-study-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build && node -e \"require('fs').renameSync('dist/template.html','dist/index.html')\""
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.9.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0",
+    "typescript": "^5.9.2",
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite-plugin-singlefile": "^2.3.0"
+  }
+}
