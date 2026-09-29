@@ -186,9 +186,8 @@ function renderChapter(sec,idx){
     <p class="chapter-tag reveal">${meta.tag}</p>
     <h2 class="sec-title reveal reveal-d1">${meta.title}</h2>
   </div>`;
-  const prose=document.createElement('div');prose.className='prose';
+  let prose=document.createElement('div');prose.className='prose';
   ch.appendChild(prose);
-  let pCount=0;
   sec.blocks.forEach((b,i)=>{
     if(b.type==='p'){
       const h=headingOf(b.text);
@@ -220,7 +219,8 @@ function renderChapter(sec,idx){
       w.innerHTML=`<table class="tbl">${rows}</table>`;
       prose.appendChild(w);
     }
-    injectModules(ch,prose,idx,i);
+    const mod=moduleFor(idx,i);
+    if(mod){ch.appendChild(mod);prose=document.createElement('div');prose.className='prose';ch.appendChild(prose);}
   });
   // checkpoint at chapter end
   const cp=buildCheckpoint(idx);
@@ -230,16 +230,16 @@ function renderChapter(sec,idx){
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 
 /* ---------- module injector ---------- */
-function injectModules(ch,prose,secIdx,blockIdx){
-  const add=el=>{prose.appendChild(el);};
-  if(secIdx===0&&blockIdx===16)add(buildSpectrum());
-  if(secIdx===0&&blockIdx===51)add(buildFlashcards());
-  if(secIdx===1&&blockIdx===5)add(buildLifecycle());
-  if(secIdx===2&&blockIdx===17)add(buildPentestStepper());
-  if(secIdx===2&&blockIdx===26)add(buildBoxes());
-  if(secIdx===3&&blockIdx===16)add(buildHandshake());
-  if(secIdx===3&&blockIdx===22)add(buildPortStates());
-  if(secIdx===3&&blockIdx===67)add(buildScanner());
+function moduleFor(secIdx,blockIdx){
+  if(secIdx===0&&blockIdx===16)return buildSpectrum();
+  if(secIdx===0&&blockIdx===51)return buildFlashcards();
+  if(secIdx===1&&blockIdx===5)return buildLifecycle();
+  if(secIdx===2&&blockIdx===17)return buildPentestStepper();
+  if(secIdx===2&&blockIdx===26)return buildBoxes();
+  if(secIdx===3&&blockIdx===16)return buildHandshake();
+  if(secIdx===3&&blockIdx===22)return buildPortStates();
+  if(secIdx===3&&blockIdx===67)return buildScanner();
+  return null;
 }
 
 /* ================= MODULE: hacker spectrum ================= */
@@ -834,7 +834,7 @@ function initScrollFX(){
 /* ================= boot ================= */
 (async function(){
   try{
-    const res=await fetch('assets/data/content.json');
+    const res=await fetch('assets/data/content.json?v=3');
     CONTENT=await res.json();
   }catch(e){
     $('#chapters').innerHTML='<p style="text-align:center;padding:80px 20px;color:var(--red);font-family:var(--mono)">failed to load content.json</p>';
