@@ -797,7 +797,7 @@ function buildNight(){
   const grid=$('.night-grid',panel);
   items.forEach(t=>{
     const d=document.createElement('div');d.className='night-item';
-    const p=document.createElement('p');p.textContent=t;d.appendChild(p);grid.appendChild(d);
+    const p=document.createElement('p');p.textContent=t.replace(/^\d+\.\s*/,'');d.appendChild(p);grid.appendChild(d);
   });
   root.appendChild(panel);
 }
@@ -834,7 +834,7 @@ function initScrollFX(){
 /* ================= boot ================= */
 (async function(){
   try{
-    const res=await fetch('assets/data/content.json?v=3');
+    const res=await fetch('assets/data/content.json?v=4');
     CONTENT=await res.json();
   }catch(e){
     $('#chapters').innerHTML='<p style="text-align:center;padding:80px 20px;color:var(--red);font-family:var(--mono)">failed to load content.json</p>';
