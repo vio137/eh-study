@@ -1,6 +1,500 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0c18"><title>FIELDNOTES / Ethical Hacking, seen differently</title><meta name="description" content="A visual, animated crash course in ethical hacking with 40 bite-sized scenes and a 63-question drill."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/v3.css?v=3"></head><body>
-<div class="cursor-glow" aria-hidden="true"></div><nav class="nav"><a href="#home" class="identity" aria-label="Fieldnotes home"><span class="identity-glyph">◈</span> FIELDNOTES<span class="identity-dot">.</span></a><span class="nav-middle">THE ETHICAL HACKING FIELD GUIDE</span><div class="nav-right"><button id="sound" aria-label="Turn sound on" title="Sound is off">SOUND <span>OFF</span></button><a href="#drill">EXAM DRILL <span>↗</span></a></div></nav>
-<header id="home" class="hero"><div class="hero-orbit" aria-hidden="true"><span class="orbit o1"></span><span class="orbit o2"></span><span class="orbit o3"></span><span class="orbit-center">EH</span><i class="sat s1"></i><i class="sat s2"></i><i class="sat s3"></i></div><div class="hero-copy"><p class="eyebrow"><span class="live-dot"></span> A FIELD GUIDE, NOT A TEXTBOOK <span> / 2026</span></p><h1>Learn to <em>see</em><br>the invisible.</h1><p class="hero-line">40 tiny visual lessons. Four chapters. One exam tomorrow.</p><a class="hero-cta" href="#learn">START THE JOURNEY <span>↗</span></a></div><div class="hero-bottom"><span>SCROLL TO ENTER ↓</span><span>01 / 04&nbsp;&nbsp; THE FOUNDATIONS</span></div></header>
-<main id="learn"><section class="player-shell"><div class="player-head"><div><span class="eyebrow">INTERACTIVE FIELD GUIDE</span><h2>One idea at a time.</h2></div><span id="sceneCounter">SCENE 01 / 40</span></div><div class="chapter-tabs" id="chaptersNav" aria-label="Choose chapter"></div><div class="player" id="player"><div class="scene-top"><span id="sceneChapter"></span><span id="sceneIndex"></span></div><div class="scene-layout"><div class="scene-art" id="sceneArt" role="img" aria-label="Animated lesson graphic"></div><div class="scene-copy"><div class="scene-label" id="sceneLabel"></div><h3 id="sceneTitle"></h3><p id="sceneLine"></p><div id="sceneInteraction"></div><button class="notes-toggle" id="notesToggle" aria-expanded="false">OPEN THE FULL SOURCE NOTE <span>↗</span></button><div class="source-notes" id="sourceNotes" hidden></div></div></div><div class="scene-foot"><div class="scene-progress"><span id="progressFill"></span></div><div class="scene-controls"><span class="control-hint">TAP THE GRAPHIC TO EXPLORE</span><button id="prev" aria-label="Previous scene">←</button><button id="next" aria-label="Next scene">NEXT IDEA ↗</button></div></div></div><div class="chapter-map" id="chapterMap"></div></section>
-<section id="drill" class="drill"><div class="section-header"><span class="eyebrow">05 / PUT IT TO THE TEST</span><h2>The exam drill<span>.</span></h2><p>63 real questions from your guide. Reveal, mark, revisit. Your progress stays on this device.</p></div><div class="drill-panel"><div class="drill-toolbar"><div class="drill-stats" id="stats"></div><label class="search-wrap"><span>⌕</span><input id="qsearch" type="search" placeholder="Find a topic or question" aria-label="Search questions"></label></div><div id="filters" class="filters"></div><div id="questionList" class="question-list"></div></div></section>
-<section id="cram" class="cram"><div class="section-header"><span class="eyebrow">06 / LAST LOOK</span><h2>Night-before<span>.</span></h2><p>Thirty ideas. Swipe through them when time is running out.</p></div><div id="cramList" class="cram-list"></div></section></main><footer><span>◈ FIELDNOTES</span><p>Use these ideas only on systems you own or have written permission to test.</p><a href="#home">BACK TO TOP ↑</a></footer><script src="assets/js/v3.js?v=3"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#04070a">
+<title>GH0ST://PROTOCOL — Ethical Hacking, the cinematic study file</title>
+<meta name="description" content="A cinematic, motion-first study file for the Ethical Hacking course: four lectures taught through animation, plus the 63-question drill and the night-before cram deck.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/v4.css?v=4.0.0">
+</head>
+<body>
+
+<!-- ATMOSPHERE -->
+<div class="fx-grain" aria-hidden="true"></div>
+<div class="fx-scanlines" aria-hidden="true"></div>
+<div class="fx-vignette" aria-hidden="true"></div>
+
+<!-- BOOT -->
+<div id="boot" role="dialog" aria-label="Loading">
+  <div class="boot-inner">
+    <pre id="boot-log" class="boot-log"></pre>
+    <div class="boot-bar"><span id="boot-fill"></span></div>
+    <div class="boot-skip" id="boot-skip">TAP TO SKIP</div>
+  </div>
+</div>
+
+<!-- HUD -->
+<header id="hud">
+  <div class="hud-left">
+    <span class="hud-mark">GH0ST<span class="hud-slash">://</span>PROTOCOL</span>
+    <span id="hud-act" class="hud-act">BOOT</span>
+  </div>
+  <div class="hud-right">
+    <button id="btn-cram" class="hud-btn" type="button">CRAM</button>
+    <button id="btn-drill" class="hud-btn hud-btn-hot" type="button">DRILL&nbsp;·63</button>
+    <button id="btn-sound" class="hud-btn hud-icon" type="button" aria-label="Toggle sound">SOUND&nbsp;<span id="sound-state">OFF</span></button>
+  </div>
+  <div id="hud-progress"><span id="hud-progress-fill"></span></div>
+</header>
+
+<main id="film">
+
+  <!-- ============ HERO ============ -->
+  <section class="scene scene-hero" id="s-hero" data-act="BOOT">
+    <canvas id="cv-hero" class="cv"></canvas>
+    <div class="hero-core">
+      <div class="hero-kicker">A CINEMATIC STUDY FILE · 4 LECTURES · 63 QUESTIONS · 0 LECTURE SLIDES</div>
+      <h1 class="hero-title"><span class="glitch" data-text="ETHICAL">ETHICAL</span><br><span class="glitch glitch-2" data-text="HACKING">HACKING</span></h1>
+      <div class="hero-sub">Everything you need for tomorrow, taught in motion.<br>Scroll like it's a film. Tap what glows.</div>
+    </div>
+    <div class="scroll-cue"><span class="scroll-cue-line"></span>SCROLL TO BREACH</div>
+  </section>
+
+  <!-- ============ ACT I ============ -->
+  <section class="scene scene-divider" id="s-act1" data-act="ACT I">
+    <div class="divider-num">01</div>
+    <div class="divider-word">ORIGIN<br>STORIES</div>
+    <div class="divider-sub">who hackers are, and what makes one of them ethical</div>
+  </section>
+
+  <section class="scene" id="s-compliment" data-act="ACT I">
+    <div class="stage">
+      <div class="cap-top">M.I.T. · EARLY 1960s</div>
+      <div class="big-word" id="era-word">"HACKER"</div>
+      <div class="cap-mid" id="era-cap-a">was a <em>compliment</em> — an elegant trick, pulled off with style.</div>
+      <div class="cap-mid" id="era-cap-b" style="display:none">was a compliment — until it became a <em>crime</em>. Sixty years: the word changed meaning, and a profession grew out of the wreckage.</div>
+      <div class="era-track">
+        <div class="era-node" data-era="1962">1962<span>Tech Model Railroad Club coins it</span></div>
+        <div class="era-node" data-era="1970">1970s<span>phone phreaks · a toy whistle at 2600 Hz</span></div>
+        <div class="era-node" data-era="1983">1983<span>WarGames makes it a villain</span></div>
+        <div class="era-node" data-era="1988">1988<span>the Morris Worm makes it a crime</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-worm" data-act="ACT I">
+    <canvas id="cv-worm" class="cv"></canvas>
+    <div class="stage">
+      <div class="cap-top">TRUE STORY · NOVEMBER 2, 1988</div>
+      <div class="worm-counter"><span id="worm-count">0</span><small>MACHINES INFECTED</small></div>
+      <div class="cap-mid">The Morris Worm was meant to be harmless. A coding mistake made it reinfect machines until they choked — roughly <em>10% of the young internet</em>, down in a night.</div>
+      <div class="cap-low">Out of that wreckage a job appeared: break in first — politely, with permission, and with a written report.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-define" data-act="ACT I">
+    <div class="stage">
+      <div class="cap-top">THE DEFINITION, STRIPPED OF FOLKLORE</div>
+      <div class="def-line" id="def-line">
+        <span class="w">HACKING</span><span class="w">IS</span><span class="w">GAINING</span><span class="w w-hot">UNAUTHORIZED</span><span class="w w-hot">ACCESS</span><span class="w">TO</span><span class="w">A</span><span class="w">SYSTEM,</span><span class="w">NETWORK</span><span class="w">OR</span><span class="w">DEVICE.</span>
+      </div>
+      <div class="cap-mid">It doesn't say clever. It doesn't say evil. It runs from harmless curiosity to organized crime — the access is the constant.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-axes" data-act="ACT I">
+    <div class="stage stage-full">
+      <div class="cap-top">EVERY HACKER IS ONE POINT ON TWO QUESTIONS</div>
+      <div class="axes-wrap">
+        <svg id="axes-svg" viewBox="0 0 700 460" preserveAspectRatio="xMidYMid meet">
+          <line x1="80" y1="400" x2="660" y2="400" class="ax"/>
+          <line x1="80" y1="400" x2="80" y2="40" class="ax"/>
+          <text x="655" y="432" class="ax-label" text-anchor="end">INTENT → help ········ harm</text>
+          <text x="60" y="40" class="ax-label" transform="rotate(-90 60 40)" text-anchor="end">PERMISSION →</text>
+          <text x="30" y="60" class="ax-tag">YES</text>
+          <text x="30" y="396" class="ax-tag">NO</text>
+          <g class="hack-node" data-name="WHITE HAT" data-line="permission + protection. the career this course builds." transform="translate(150,110)"><circle r="9" class="n-white"/><text y="-18">WHITE HAT</text></g>
+          <g class="hack-node" data-name="GRAY HAT" data-line="no permission, no malice. still illegal in most places." transform="translate(180,330)"><circle r="9" class="n-gray"/><text y="-18">GRAY HAT</text></g>
+          <g class="hack-node" data-name="BLACK HAT" data-line="no permission, for gain or harm. runs the cybercrime economy." transform="translate(560,330)"><circle r="9" class="n-black"/><text y="-18">BLACK HAT</text></g>
+          <g class="hack-node" data-name="SCRIPT KIDDIE" data-line="runs other people's tools without understanding them." transform="translate(400,372)"><circle r="7" class="n-dim"/><text y="-18">SCRIPT KIDDIE</text></g>
+          <g class="hack-node" data-name="HACKTIVIST" data-line="hacking as protest: defacements, leaks, disruption for a cause." transform="translate(470,290)"><circle r="7" class="n-dim"/><text y="-18">HACKTIVIST</text></g>
+          <g class="hack-node" data-name="STATE-SPONSORED" data-line="government operatives: espionage, sabotage, cyber warfare." transform="translate(610,250)"><circle r="7" class="n-dim"/><text y="-18">STATE-SPONSORED</text></g>
+          <g class="hack-node" data-name="CYBERCRIMINAL" data-line="black hats with a business plan: organized, for-profit." transform="translate(530,372)"><circle r="7" class="n-dim"/><text y="-18">CYBERCRIMINAL</text></g>
+        </svg>
+        <div class="axes-readout" id="axes-readout">WERE THEY ALLOWED? · WHAT DID THEY WANT?</div>
+      </div>
+      <div class="cap-low">The hat colors come from cowboy films — the hero wore white, the villain black.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-paradox" data-act="ACT I">
+    <div class="stage">
+      <div class="cap-top">THE DEFINITION THAT LOOKS LIKE A CONTRADICTION</div>
+      <div class="paradox-line">
+        <span class="p-auth" id="p-auth">AUTHORIZED</span>
+        <span class="p-mid">attempt to gain</span>
+        <span class="p-unauth" id="p-unauth">UNAUTHORIZED</span>
+        <span class="p-mid">access</span>
+      </div>
+      <div class="cap-mid">Read it twice and it stops being a paradox: the access would be unauthorized — except the owner signed permission first. Also called <em>penetration testing</em> or <em>red teaming</em>.</div>
+      <div class="cap-low">Same tools as the criminal. Opposite mission: get in, get out, write everything down.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-cia" data-act="ACT I">
+    <div class="stage">
+      <div class="cap-top">THE THREE THINGS EVERY ATTACK TRIES TO BREAK</div>
+      <div class="cia-row">
+        <div class="cia-col"><div class="cia-letter">C</div><div class="cia-name">CONFIDENTIALITY</div><div class="cia-line">secrets stay secret</div></div>
+        <div class="cia-col"><div class="cia-letter">I</div><div class="cia-name">INTEGRITY</div><div class="cia-line">data stays correct</div></div>
+        <div class="cia-col"><div class="cia-letter">A</div><div class="cia-name">AVAILABILITY</div><div class="cia-line">systems stay up</div></div>
+      </div>
+      <div class="cap-mid">For any attack in any exam answer, ask which letter it breaks. Stealing data = C. Changing data = I. Deleting or blocking = A. Ransomware hits all three in one move.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-domino" data-act="ACT I">
+    <div class="stage">
+      <div class="cap-top">SIX TERMS, ONE CHAIN REACTION</div>
+      <div class="domino-row">
+        <div class="domino" data-d="0"><b>VULNERABILITY</b><span>the unlocked window — a weakness</span></div>
+        <div class="domino" data-d="1"><b>THREAT</b><span>the burglar on the street</span></div>
+        <div class="domino" data-d="2"><b>EXPLOIT</b><span>the brick through the window</span></div>
+        <div class="domino" data-d="3"><b>RISK</b><span>likelihood × damage</span></div>
+        <div class="domino" data-d="4"><b>ATTACK SURFACE</b><span>every door, window & employee</span></div>
+      </div>
+      <div class="cap-mid">The CIA triad completes the family: the three things worth breaking.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-ethics" data-act="ACT I">
+    <div class="stage">
+      <div class="cap-top">WHAT MAKES IT ETHICAL — SEVEN PRINCIPLES, ONE SENTENCE</div>
+      <div class="ethics-ticker" id="ethics-ticker">
+        <span>GET PERMISSION</span><span>KEEP SECRETS</span><span>TELL THE TRUTH</span><span>BREAK NOTHING</span><span>OWN YOUR ACTIONS</span><span>HIDE NOTHING</span><span>KEEP LEARNING</span>
+      </div>
+      <div class="stamp" id="stamp-india">ILLEGAL WITHOUT IT — IT ACT, 2000</div>
+      <div class="cap-mid">Skill doesn't separate the white hat from the black hat — the tools are identical. The code of conduct does. In India, unauthorized access is punishable under the Information Technology Act, 2000.</div>
+    </div>
+  </section>
+
+  <!-- ============ ACT II ============ -->
+  <section class="scene scene-divider" id="s-act2" data-act="ACT II">
+    <div class="divider-num">02</div>
+    <div class="divider-word">THE SEVEN<br>PHASES</div>
+    <div class="divider-sub">real spies gather maps carefully, record repairs</div>
+  </section>
+
+  <section class="scene" id="s-recon" data-act="ACT II">
+    <canvas id="cv-radar" class="cv"></canvas>
+    <div class="stage">
+      <div class="phase-tag">PHASE 1 / 7 · RECONNAISSANCE</div>
+      <div class="cap-big">Know the target <em>before you touch it.</em></div>
+      <div class="duo">
+        <div class="duo-card"><b>PASSIVE</b><span>WHOIS · Shodan · Google dorking</span><i>invisible — you never touch the target</i></div>
+        <div class="duo-card"><b>ACTIVE</b><span>pings · probes · port scans</span><i>louder — your packets land in their logs</i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-scanning" data-act="ACT II">
+    <div class="stage">
+      <div class="phase-tag">PHASE 2 / 7 · SCANNING</div>
+      <div class="cap-big">Recon asks <em>what's out there.</em><br>Scanning asks <em>where it hurts.</em></div>
+      <div class="portgrid" id="portgrid"></div>
+      <div class="cap-low">Open ports · running services · known vulnerabilities — Nmap, Nessus, OpenVAS, Nikto.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-gaining" data-act="ACT II">
+    <div class="stage">
+      <div class="phase-tag">PHASE 3 / 7 · GAINING ACCESS</div>
+      <div class="cap-big">The break-in the films show.</div>
+      <div class="door-wrap">
+        <div class="door" id="door"><div class="door-panel"></div><div class="door-glow"></div></div>
+        <div class="esc-arrow" id="esc-arrow"><span>user</span><b>→</b><span class="esc-root">root</span></div>
+      </div>
+      <div class="cap-mid">A found vulnerability is exploited to enter — then privilege escalation climbs from an ordinary account to root or admin. Workhorse tool: Metasploit.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-maintaining" data-act="ACT II">
+    <div class="stage">
+      <div class="phase-tag">PHASE 4 / 7 · MAINTAINING ACCESS</div>
+      <div class="cap-big">Getting in was hard.<br><em>Never do it twice.</em></div>
+      <div class="backdoor-wrap"><div class="door shut"><div class="door-panel"></div></div><div class="door back" id="backdoor"><div class="door-panel"></div><div class="door-glow"></div></div></div>
+      <div class="cap-mid">Backdoors, rootkits, hidden accounts — ways back in that survive password changes and reboots. The white hat plants them documented, then removes every one.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-clearing" data-act="ACT II">
+    <div class="stage">
+      <div class="phase-tag phase-tag-red">PHASE 5 / 7 · CLEARING TRACKS — THE UNETHICAL PHASE</div>
+      <div class="cap-big">Delete every trace.</div>
+      <pre class="loglines" id="loglines">[02:13:04] sshd: accepted password for admin from 10.0.0.66
+[02:13:41] sudo: admin → root · command: /bin/bash
+[02:15:22] auth: session opened for user root
+[02:17:09] xfer: 412 MB → 45.155.██.██
+[02:18:31] sshd: session closed</pre>
+      <div class="cap-mid">Your slides say it plainly: this phase <em>is actually an unethical activity</em>. It's taught so you know what an attacker erases — and how to protect logs with central, off-box logging.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-reporting" data-act="ACT II">
+    <div class="stage">
+      <div class="phase-tag">PHASE 6 / 7 · REPORTING</div>
+      <div class="cap-big">The phase that <em>pays.</em></div>
+      <div class="report-doc" id="report-doc">
+        <div class="report-title">PENETRATION TEST — FINDINGS</div>
+        <div class="report-lines"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="cap-mid">Document what was found, exactly how it was exploited, what was reached, the business impact, and the fix. A test without a report is just a crime with extra steps — this document is the whole difference.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-remediation" data-act="ACT II">
+    <div class="stage">
+      <div class="phase-tag">PHASE 7 / 7 · REMEDIATION + RETEST</div>
+      <div class="cap-big">Close the loop.</div>
+      <div class="loop-wrap">
+        <svg viewBox="0 0 220 120" class="loop-svg"><path id="loop-path" d="M20 60 C20 20 90 20 110 55 C130 90 200 95 200 55" fill="none"/><path class="loop-arrow" d="M200 55 l-14 -3 l4 12 z"/></svg>
+        <div class="loop-note">patch → reconfigure → <b>attack it again</b></div>
+      </div>
+      <div class="cap-mid">A fix without a retest is a hope, not a control. Then the whole lifecycle loops — systems, threats and tools all move on. Security is a cycle, not a project.</div>
+    </div>
+  </section>
+
+  <!-- ============ ACT III ============ -->
+  <section class="scene scene-divider" id="s-act3" data-act="ACT III">
+    <div class="divider-num">03</div>
+    <div class="divider-word">THE<br>CONTRACT</div>
+    <div class="divider-sub">penetration testing — the break-in, bought in advance</div>
+  </section>
+
+  <section class="scene" id="s-fca" data-act="ACT III">
+    <div class="stage">
+      <div class="cap-top">PENTEST, WORD BY WORD</div>
+      <div class="slam-row">
+        <div class="slam" data-s="0"><b>FOCUSED</b><span>named systems, named dates, named limits</span></div>
+        <div class="slam" data-s="1"><b>CONTROLLED</b><span>rules of engagement; it never becomes the disaster it simulates</span></div>
+        <div class="slam" data-s="2"><b>AUTHORIZED</b><span>written permission, signed first — the line between consultant and convict</span></div>
+      </div>
+      <div class="cap-mid">…a simulation of a real cyberattack, to identify and exploit vulnerabilities — with proof, not plunder, as the goal.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-zeroday" data-act="ACT III">
+    <div class="stage">
+      <div class="cap-top">THE COUNTDOWN EVERY DEFENDER FEARS</div>
+      <div class="zero-wrap"><div class="zero-num" id="zero-num">?</div><div class="zero-label">DAYS TO WRITE THE FIX</div></div>
+      <div class="cap-mid">A <em>zero-day</em> is exploited before the vendor knows it exists — zero days to patch. Stuxnet burned <em>four</em> in one weapon. Equifax lost 147 million records to a flaw whose patch had sat unapplied for two months.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-box" data-act="ACT III">
+    <div class="stage">
+      <div class="cap-top">HOW MUCH IS THE TESTER TOLD?</div>
+      <div class="box-wrap">
+        <div class="cube" id="cube"><div class="cube-fill" id="cube-fill"></div><div class="cube-edge"></div></div>
+        <div class="box-legend">
+          <div class="box-item" data-b="0"><b>BLACK BOX</b><span>knows nothing — the stranger off the street</span></div>
+          <div class="box-item" data-b="1"><b>GRAY BOX</b><span>a normal user account — the insider, or one phished password</span></div>
+          <div class="box-item" data-b="2"><b>WHITE BOX</b><span>source code + configs — the auditor with the blueprints</span></div>
+        </div>
+      </div>
+      <div class="cap-low">Testing a bank vault: black = walk in off the street. Gray = open a savings account first. White = the manager hands you the blueprints.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-pentest5" data-act="ACT III">
+    <div class="stage">
+      <div class="cap-top">THE LIFECYCLE, WEARING A SUIT — 5 PHASES UNDER CONTRACT</div>
+      <div class="stepper5" id="stepper5">
+        <div class="st5"><b>1 · PLAN + RECON</b><span>scope, goals, intelligence</span></div>
+        <div class="st5"><b>2 · SCAN</b><span>Nikto, Nessus, Nmap sweep for known flaws</span></div>
+        <div class="st5"><b>3 · EXPLOIT</b><span>password cracking, SQL injection, social engineering</span></div>
+        <div class="st5"><b>4 · MAINTAIN</b><span>show how far the damage could reach</span></div>
+        <div class="st5"><b>5 · REPORT</b><span>what, how, how bad, and the fix</span></div>
+      </div>
+      <div class="cap-mid">The exam favorite: a vulnerability assessment <em>lists</em> holes. A penetration test <em>proves</em> them.</div>
+    </div>
+  </section>
+
+  <!-- ============ ACT IV ============ -->
+  <section class="scene scene-divider" id="s-act4" data-act="ACT IV">
+    <div class="divider-num">04</div>
+    <div class="divider-word">SEEING THE<br>NETWORK</div>
+    <div class="divider-sub">nmap — one article in 1997, still the first tool opened</div>
+  </section>
+
+  <section class="scene" id="s-trinity" data-act="ACT IV">
+    <div class="stage">
+      <div class="cap-top">TRUE STORY · 2003</div>
+      <div class="trinity-term">
+        <span class="tt-prompt">trinity@grid:~$</span> <span id="tt-cmd"></span><span class="caret">▊</span>
+      </div>
+      <div class="cap-big">In The Matrix Reloaded, Trinity disables a power grid with a <em>real tool</em>: nmap — finds SSH on port 22, and exploits it.</div>
+      <div class="cap-low">Born in Phrack magazine, September 1997: "The Art of Port Scanning", by Fyodor. Security people cheered in the theater; Hollywood finally used the actual command.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-building" data-act="ACT IV">
+    <div class="stage">
+      <div class="cap-top">TWO ADDRESS SYSTEMS, STACKED</div>
+      <div class="cap-big">The IP finds the building.<br><em>The port finds the door.</em></div>
+      <div class="bld-wrap">
+        <svg id="bld-svg" viewBox="0 0 640 300">
+          <rect x="60" y="40" width="240" height="230" class="bld-body"/>
+          <text x="180" y="28" class="bld-ip">45.33.32.156</text>
+          <g class="bld-door" data-port="22" transform="translate(90,210)"><rect width="34" height="60"/><text x="17" y="-8">22·SSH</text></g>
+          <g class="bld-door" data-port="80" transform="translate(160,210)"><rect width="34" height="60"/><text x="17" y="-8">80·HTTP</text></g>
+          <g class="bld-door" data-port="443" transform="translate(230,210)"><rect width="34" height="60"/><text x="17" y="-8">443·HTTPS</text></g>
+          <text x="340" y="80" class="bld-band" data-band="0">0 – 1023 · WELL-KNOWN — the famous services live here</text>
+          <text x="340" y="130" class="bld-band" data-band="1">1024 – 49151 · REGISTERED</text>
+          <text x="340" y="180" class="bld-band" data-band="2">49152 – 65535 · DYNAMIC / PRIVATE</text>
+          <text x="340" y="245" class="bld-total">65,536 doors per machine</text>
+        </svg>
+      </div>
+      <div class="cap-low">Own these: 21 FTP · 22 SSH · 23 Telnet · 25 SMTP · 53 DNS · 80 HTTP · 443 HTTPS · 445 SMB · 3306 MySQL · 3389 RDP</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-handshake" data-act="ACT IV">
+    <div class="stage stage-full">
+      <div class="cap-top">THE HANDSHAKE EVERY SCANNER EXPLOITS</div>
+      <svg id="hs-svg" viewBox="0 0 700 330">
+        <text x="120" y="30" class="hs-host" text-anchor="middle">CLIENT</text>
+        <text x="580" y="30" class="hs-host" text-anchor="middle">SERVER</text>
+        <line x1="120" y1="50" x2="120" y2="300" class="hs-line"/>
+        <line x1="580" y1="50" x2="580" y2="300" class="hs-line"/>
+        <g id="hs-packets">
+          <line id="hs-p1" x1="120" y1="80" x2="580" y2="80" class="hs-packet"/><text id="hs-t1" x="350" y="70" class="hs-packet-label" text-anchor="middle">SYN — "let us talk"</text>
+          <line id="hs-p2" x1="580" y1="150" x2="120" y2="150" class="hs-packet"/><text id="hs-t2" x="350" y="140" class="hs-packet-label" text-anchor="middle">SYN-ACK — "agreed"</text>
+          <line id="hs-p3" x1="120" y1="220" x2="580" y2="220" class="hs-packet"/><text id="hs-t3" x="350" y="210" class="hs-packet-label" text-anchor="middle">ACK — channel open</text>
+        </g>
+        <text id="hs-verdict" x="350" y="300" class="hs-verdict" text-anchor="middle"></text>
+      </svg>
+      <div class="hs-controls">
+        <button class="hud-btn" id="hs-normal" type="button">▶ FULL HANDSHAKE</button>
+        <button class="hud-btn" id="hs-synscan" type="button">▶ SYN SCAN (-sS)</button>
+      </div>
+      <div class="cap-low" id="hs-caption">A connect scan finishes the handshake with every port — and every finished connection can be logged. The SYN scan hears SYN-ACK ("open"), then walks away with an RST: half-open, and much quieter.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-states" data-act="ACT IV">
+    <div class="stage">
+      <div class="cap-top">EVERY PORT ANSWERS ONE OF THREE WAYS</div>
+      <div class="states-row">
+        <div class="state-card st-open"><div class="state-door"></div><b>OPEN</b><span>a service is listening — every one is a possible way in</span></div>
+        <div class="state-card st-closed"><div class="state-door"></div><b>CLOSED</b><span>"nobody lives here" — but the machine is alive</span></div>
+        <div class="state-card st-filtered"><div class="state-door"></div><b>FILTERED</b><span>a firewall pretends you don't exist — nmap can't tell</span></div>
+      </div>
+      <div class="cap-low">The doorman model: the door opens · "nobody here", said from inside · a guard who ignores you. Attackers love the first, note the second, curse the third.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-flags" data-act="ACT IV">
+    <div class="stage stage-full">
+      <div class="cap-top">THE COMMAND LINE, ASSEMBLED IN THE AIR</div>
+      <div class="flag-term"><span class="tt-prompt">$</span> nmap <span id="flag-typed"></span><span class="caret">▊</span></div>
+      <div class="flag-chips" id="flag-chips">
+        <div class="chip" data-f="-sS"><b>-sS</b><span>SYN stealth — the professional default</span></div>
+        <div class="chip" data-f="-sV"><b>-sV</b><span>version detection — "Apache 2.4.49", not just "80 open"</span></div>
+        <div class="chip" data-f="-O"><b>-O</b><span>OS fingerprint from TTL / window / DF / TOS</span></div>
+        <div class="chip" data-f="-A"><b>-A</b><span>aggressive: OS + versions + scripts + traceroute. loud.</span></div>
+        <div class="chip" data-f="-F"><b>-F</b><span>fast — 100 most common ports</span></div>
+        <div class="chip" data-f="-p"><b>-p</b><span>pick ports: exact · list · range · service names</span></div>
+        <div class="chip" data-f="/24"><b>/24</b><span>the whole subnet — 256 addresses</span></div>
+      </div>
+      <div class="cap-low">Anatomy: nmap names the machine, -p picks the doors, -F makes it quick, -A makes it thorough, -O names the OS, -sV names the software. Default scan = 1000 ports.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-report" data-act="ACT IV">
+    <div class="stage">
+      <div class="cap-top">READ A REPORT LIKE AN EXAMINER</div>
+      <pre class="nmap-report" id="nmap-report">$ nmap -A scanme.nmap.org
+Host is up (0.21s latency).
+Not shown: 996 closed tcp ports (reset)
+PORT     STATE    SERVICE     VERSION
+22/tcp   <b class="hl-open">open</b>     ssh         OpenSSH 6.6.1p1
+80/tcp   <b class="hl-open">open</b>     http        Apache httpd 2.4.7
+9929/tcp <b class="hl-open">open</b>     nping-echo  Nping echo
+OS details: Linux 3.2 - 4.9
+1 host up · scanned in 21.4 seconds</pre>
+      <div class="cap-mid">996 boring doors hidden, three interesting ones printed. Port + state + service + <em>exact version</em> — because vulnerabilities attach to versions. scanme.nmap.org is run by the nmap project itself for legal practice.</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s-law" data-act="ACT IV">
+    <div class="stage">
+      <div class="cap-top">THE LAW OF THE SCAN</div>
+      <div class="stamp stamp-big" id="stamp-law">NO PERMISSION = CRIME</div>
+      <div class="cap-mid">Scanning without authorization is illegal and unethical, full stop — punishable under the IT Act, 2000. The same action is a professional service with a signature, and an offence without one.</div>
+      <div class="cap-low">Legal practice targets, built for exactly this: <em>scanme.nmap.org</em> · <em>testphp.vulweb.com</em></div>
+    </div>
+  </section>
+
+  <!-- ============ FINALE ============ -->
+  <section class="scene scene-finale" id="s-finale" data-act="FINAL">
+    <canvas id="cv-finale" class="cv"></canvas>
+    <div class="stage">
+      <div class="cap-top">EXAM DAY</div>
+      <div class="finale-title">YOU KNOW THE METHOD.<br><em>NOW PROVE IT.</em></div>
+      <div class="finale-btns">
+        <button class="big-btn" id="btn-drill2" type="button">THE DRILL · 63 QUESTIONS</button>
+        <button class="big-btn big-btn-ghost" id="btn-cram2" type="button">CRAM DECK · 32 LINES</button>
+      </div>
+      <div class="cap-low">Walk in knowing the lifecycle, the three homework answers, and the port table — those three alone cover most of the marks. Good luck tomorrow.</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- DRILL OVERLAY -->
+<div id="drill" class="overlay" hidden>
+  <div class="overlay-head">
+    <div class="overlay-title">THE DRILL <span id="drill-count"></span></div>
+    <div class="overlay-filters" id="drill-filters">
+      <button class="fchip on" data-f="all">ALL</button>
+      <button class="fchip" data-f="QH">HOMEWORK</button>
+      <button class="fchip" data-f="QE">COMMANDS</button>
+      <button class="fchip" data-f="missed">MISSED</button>
+    </div>
+    <button class="overlay-x" id="drill-close" type="button" aria-label="Close">✕</button>
+  </div>
+  <div class="drill-progress"><span id="drill-fill"></span></div>
+  <div class="drill-body">
+    <div class="drill-card" id="drill-card">
+      <div class="drill-qid" id="drill-qid"></div>
+      <div class="drill-q" id="drill-q"></div>
+      <div class="drill-a" id="drill-a" hidden></div>
+      <div class="drill-reveal-hint" id="drill-hint">TAP CARD TO REVEAL</div>
+    </div>
+    <div class="drill-actions">
+      <button class="big-btn big-btn-ghost" id="drill-prev" type="button">← PREV</button>
+      <button class="big-btn btn-missed" id="drill-missed" type="button">MISSED IT</button>
+      <button class="big-btn btn-got" id="drill-got" type="button">GOT IT</button>
+      <button class="big-btn big-btn-ghost" id="drill-next" type="button">NEXT →</button>
+    </div>
+  </div>
+</div>
+
+<!-- CRAM OVERLAY -->
+<div id="cram" class="overlay" hidden>
+  <div class="overlay-head">
+    <div class="overlay-title">CRAM DECK <span id="cram-count"></span></div>
+    <button class="overlay-x" id="cram-close" type="button" aria-label="Close">✕</button>
+  </div>
+  <div class="cram-body">
+    <div class="cram-card" id="cram-card">
+      <div class="cram-num" id="cram-num"></div>
+      <div class="cram-text" id="cram-text"></div>
+    </div>
+    <div class="drill-actions">
+      <button class="big-btn big-btn-ghost" id="cram-prev" type="button">← PREV</button>
+      <button class="big-btn" id="cram-next" type="button">NEXT →</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="assets/js/v4.js?v=4.0.0"></script>
+</body>
+</html>

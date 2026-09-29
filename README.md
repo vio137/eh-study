@@ -1,7 +1,7 @@
-# FIELDNOTES / Ethical Hacking
+# GH0ST://PROTOCOL — Ethical Hacking, the cinematic study file
 
-A visual-first, bite-sized companion for the supplied four-lecture Ethical Hacking guide. Forty illustrated interactive scenes, the original detailed lecture notes behind each scene, a 63-question exam drill, and a night-before revision sheet. Static HTML/CSS/JS, no build step. Progress is saved locally in this browser.
+A motion-first rebuild: four lectures taught as full-screen animated scenes (origin stories, the seven-phase lifecycle, penetration testing, and Nmap), plus a 63-question drill and the night-before cram deck. Static HTML/CSS/JS with GSAP ScrollTrigger — no build step.
 
 Live: https://vio137.github.io/eh-study/
 
-Serve locally with `python3 -m http.server`. Practice only on systems you own or have written authorization to test.
+Sound is optional and off by default (toggle in the top bar). Drill progress is saved locally on the device.
