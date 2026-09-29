@@ -6,7 +6,7 @@ const hasGsap = typeof gsap!=="undefined" && typeof ScrollTrigger!=="undefined";
 if(!hasGsap){ document.body.classList.add("noanim"); const st=document.createElement("style");
   st.textContent=".noanim .cia-col,.noanim .domino,.noanim .slam,.noanim .chip,.noanim .state-card,.noanim .hack-node,.noanim .stamp{opacity:1!important;transform:none!important}.noanim .def-line .w{opacity:1!important;transform:none!important}.noanim .bld-band,.noanim .bld-total{opacity:1!important}.noanim .report-lines span{width:100%!important}.noanim .ethics-ticker span{opacity:1!important}.noanim .st5{opacity:1!important;transform:none!important}.noanim .era-node{opacity:1!important;transform:none!important}";
   document.head.appendChild(st);
-} else { gsap.registerPlugin(ScrollTrigger); }
+} else { gsap.registerPlugin(ScrollTrigger); gsap.ticker.lagSmoothing(0); }
 
 /* ================= SOUND ================= */
 const Sound=(()=>{
@@ -171,8 +171,12 @@ function scenes(){
 
   // progress + act label
   ScrollTrigger.create({start:0,end:"max",onUpdate:self=>{ $("#hud-progress-fill").style.width=(self.progress*100)+"%"; }});
-  $$(".scene").forEach(s=>ScrollTrigger.create({trigger:s,start:"top 55%",end:"bottom 55%",
-    onToggle:self=>{ if(self.isActive){ $("#hud-act").textContent=s.dataset.act||""; Sound.blip(520,0.05,"square",0.03);} }}));
+  const actEl=$("#hud-act"); let lastAct="";
+  function updateAct(){ const mid=scrollY+innerHeight*0.5; let cur="";
+    for(const s of $$(".scene")){ const host=s.parentElement&&s.parentElement.classList.contains("pin-spacer")?s.parentElement:s;
+      if(host.offsetTop<=mid)cur=s.dataset.act||""; else break; }
+    if(cur!==lastAct){ lastAct=cur; actEl.textContent=cur; if(cur)Sound.blip(520,0.05,"square",0.03); } }
+  addEventListener("scroll",updateAct,{passive:true}); updateAct();
 
   // hero parallax
   gsap.to(".hero-core",{yPercent:-30,opacity:0,ease:"none",
